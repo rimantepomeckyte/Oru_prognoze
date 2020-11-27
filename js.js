@@ -46,7 +46,8 @@ const oruPrognoze = async () => {
         const uniq = naujosDatos.reduce(function (a, b) {
             if (a.indexOf(b) < 0) a.push(b);
             return a;
-        }, []);
+        }, [])
+
         console.log(uniq);
         uniq.forEach(a => {
             const finalDate = new Date(a).toDateString();
@@ -58,31 +59,26 @@ const oruPrognoze = async () => {
             divDays.style.borderRight = "1px gray solid";
             divDays.style.backgroundColor = "green"; // darbui tik
             dienuTevas.appendChild(divDays);
-            if(divDays.id === uniq[0]){
+            if (divDays.id === uniq[0]) {
                 divDays.innerHTML = "Today";
-            }else {
-            divDays.innerHTML = finalDate;}
-            /*divDays.addEventListener("click", rodykOrus)
-            function rodykOrus (){
-                 data.forecastTimestamps.forEach(oras => {
-                     // console.log(oras);
-                     for (let i=0, j=0; i<naujosDatos.length; i++){
-                         if(naujosDatos[i] === uniq[j]){
-                             console.log("krabas as gaslksdk")
-                             const divHours = document.createElement("div");
-                             divHours.innerHTML = `<p>${oras.forecastTimeUtc}</p>
-                       <p>${oras.airTemperature}</p>
-                       <p>Humidity: ${oras.relativeHumidity}%</p>
-                       <p>${oras.totalPrecipitation}</p>`
-                             valanduTevas.appendChild(divHours);
-                         }
-                     }
-                 })
-             }*/
+            } else {
+                divDays.innerHTML = finalDate;
+            }
+            const rodykOrus = data.forecastTimestamps.forEach(oras => {
+                const dienos = oras.forecastTimeUtc.split(" ");
+                if (dienos[0] != divDays.id) {
+                    console.log("Netinka");
+                    //console.log(dienos[0])
+                } else {
+                    /*const divHours = document.createElement("div");
+                    valanduTevas.appendChild(divHours);
+                    divHours.innerHTML = `<p>${dienos}</p>`*/
+                    console.log("tinka")
+                }
+
+            });
+            rodykOrus;
         })
-
-
-
     } catch (error) {
         console.log(error);
     }
