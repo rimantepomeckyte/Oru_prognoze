@@ -1,15 +1,11 @@
 "use strict"
-
-// https://api.meteo.lt/v1/places
-//https://api.meteo.lt/v1/places/vilnius
-// https://api.meteo.lt/v1/places/vilnius/forecasts/long-term
-
 const searchInput = document.getElementById("searchCity");
 const searchBtn = document.getElementById("searchBtn");
 const cityNamePlace = document.getElementById("cityNamePlace");
 const suggestionsList = document.getElementById("suggestionsList")
 const dienuTevas = document.getElementById("dienuTevas")
 const valanduTevas = document.getElementById("valandiniuTevas");
+const lastUpdated = document.getElementById("lastUpdated");
 
 //-------Vietoves ikelimas pagal paieska i h4----------
 const visiMiestai = async () => {
@@ -18,8 +14,7 @@ const visiMiestai = async () => {
     try {
         const response = await fetch(`https://api.meteo.lt/v1/places/${searchInput.value}`);
         const data = await response.json();
-        //console.log(data);
-
+        console.log(data);
         if (searchInput.value == data.code) {
             cityNamePlace.innerHTML = data.name
         }
@@ -39,7 +34,8 @@ const oruPrognoze = async () => {
         const response = await fetch(`https://api.meteo.lt/v1/places/${searchInput.value}/forecasts/long-term`);
         const data = await response.json();
         console.log(data);
-
+        const lastChangedSplit = data.forecastCreationTimeUtc.split(" ");
+        lastUpdated.innerHTML = `Paskutinį kartą atnaujintą šiandien ${lastChangedSplit[1]}`
         const naujosDatos = data.forecastTimestamps.map(diena => {
             const manoDatos = diena.forecastTimeUtc.split(" ")
             return manoDatos[0];
@@ -61,7 +57,7 @@ const oruPrognoze = async () => {
             divDays.style.borderRight = "1px gray solid";
             dienuTevas.appendChild(divDays);
             if (divDays.id === uniq[0]) {
-                divDays.innerHTML = "Today";
+                divDays.innerHTML = "Šiandien";
             } else {
                 divDays.innerHTML = finalDate;
             }
