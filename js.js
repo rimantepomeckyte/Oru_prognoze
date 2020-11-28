@@ -50,7 +50,7 @@ const oruPrognoze = async () => {
             return a;
         }, [])
         console.log(uniq);
-        dienuTevas.innerHTML ="";
+        dienuTevas.innerHTML = "";
         uniq.forEach(a => {
             const finalDate = new Date(a).toDateString();
             console.log(finalDate);
@@ -59,29 +59,76 @@ const oruPrognoze = async () => {
             divDays.setAttribute("class", "col-2 text-center");
             divDays.style.height = "4rem";
             divDays.style.borderRight = "1px gray solid";
-            divDays.style.backgroundColor = "green"; // darbui tik
             dienuTevas.appendChild(divDays);
             if (divDays.id === uniq[0]) {
                 divDays.innerHTML = "Today";
             } else {
                 divDays.innerHTML = finalDate;
             }
-           divDays.addEventListener("click", rodykOrus);
+            divDays.addEventListener("click", rodykOrus);
 
-            function rodykOrus(){
+            function rodykOrus() {
                 valanduTevas.innerHTML = "";
-            data.forecastTimestamps.forEach(oras => {
-                const dienos = oras.forecastTimeUtc.split(" ");
-                if (dienos[0] === divDays.id) {
-                    console.log("Tinka");
-                    const divHours = document.createElement("div");
-                    valanduTevas.appendChild(divHours);
-                    divHours.innerHTML = `<p>${dienos}</p>`
-                    //console.log(dienos[0])
-                } else {
-                        console.log("netinka")
-                }
-            });}
+                data.forecastTimestamps.forEach(oras => {
+                    console.log(oras)
+                    const dienos = oras.forecastTimeUtc.split(" ");
+                    if (dienos[0] === divDays.id) {
+                        // console.log("Tinka");
+                        const divHours = document.createElement("div");
+                        divHours.style.border = "1px gray solid";
+                        divHours.setAttribute("class", "col-2 text-center");
+                        valanduTevas.appendChild(divHours);
+                        const hoursArray = dienos[1].split(":");
+                        // console.log(hoursArray);
+                        divHours.innerHTML = `<p class="mt-3">${hoursArray[0]}:${hoursArray[1]}</p>
+                                              <p class="mb-5">${oras.airTemperature} °C</p>
+                                              <img src="img/rain-drops.png" width="20">
+                                              <p>${oras.totalPrecipitation} %</p>
+                                               <p>Vėjo greitis: ${oras.windSpeed}m/s</p> `
+                        let condition = oras.conditionCode;
+                        //console.log(condition)
+                        const iconImage = document.createElement("img");
+                        iconImage.width = "50";
+                        divHours.insertBefore(iconImage, divHours.childNodes[1]);
+                        switch (condition) {
+                            case "clear":
+                                console.log("Giedra");
+                                iconImage.src = "img/clear.png";
+                                break;
+                            case "isolated-clouds":
+                            case "scattered-clouds":
+                                iconImage.src = "img/isolated-clouds-scattered-clouds.png";
+                                break;
+                            case "overcast":
+                                iconImage.src = "img/overcast.png";
+                                break;
+                            case "light-rain":
+                                iconImage.src = "img/light-rain.png";
+                                break;
+                            case "moderate-rain":
+                                iconImage.src = "img/moderate-rain.png";
+                                break;
+                            case "heavy-rain":
+                                iconImage.src = "img/heavy-rain.png";
+                                break;
+                            case "sleet":
+                                iconImage.src = "img/sleet.png";
+                                break;
+                            case "light-snow":
+                                iconImage.src = "img/light-snow.png";
+                                break;
+                            case "moderate-snow":
+                            case "heavy-snow":
+                                iconImage.src = "img/moderate-snow-heavy-snow.png";
+                                break;
+                            case "fog":
+                                iconImage.src = "img/fog.png"
+                        }
+                    } else {
+                        //console.log("netinka")
+                    }
+                });
+            }
         })
     } catch (error) {
         console.log(error);
@@ -90,7 +137,7 @@ const oruPrognoze = async () => {
 searchBtn.addEventListener("click", oruPrognoze);
 
 //---------Suggestions-----------------
-const  suggestions = async () => {
+/*const  suggestions = async () => {
    console.log("Labas suggestion funkcija")
    console.log(searchInput.value)
    const reiksme = searchInput.value;
@@ -110,4 +157,4 @@ const  suggestions = async () => {
        console.log(error)
    }
 }
-searchInput.addEventListener("keyup", suggestions);
+searchInput.addEventListener("keyup", suggestions);*/

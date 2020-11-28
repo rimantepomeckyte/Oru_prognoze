@@ -6,22 +6,16 @@ html{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'B612', sans-serif;
 }
 body{
     width: 100%;
-    background-color: #db2e59;
+    background: url("img/sky5.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
-.scrolling-wrapper{
+.scrolling-wrapper {
     overflow-x: auto;
-}
-.valandine{
-    height:15rem;
-    background-color: bisque;
-    border-right: 1px solid #aea6a6;
-    padding: 0;
-}
-.dienos{
-    border-right: 1px solid #aea6a6;
-    background-color: aquamarine;
-    height: 4rem;
+    white-space: nowrap;
 }
