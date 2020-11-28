@@ -16,7 +16,13 @@ const visiMiestai = async () => {
         const data = await response.json();
         console.log(data);
         if (searchInput.value == data.code) {
-            cityNamePlace.innerHTML = data.name
+            cityNamePlace.innerHTML = data.name;
+            const cityAdministrative = document.createElement("p");
+            cityAdministrative.setAttribute("class", "text-capitalize")
+            cityAdministrative.style.fontSize = "15px";
+            cityAdministrative.innerHTML = data.administrativeDivision;
+            cityNamePlace.appendChild(cityAdministrative);
+            searchInput.value = "";
         }
     } catch (error) {
         console.log("KAzkas negerai!")
@@ -51,8 +57,10 @@ const oruPrognoze = async () => {
             const finalDate = new Date(a).toDateString();
             console.log(finalDate);
             const divDays = document.createElement("div");
+            divDays.style.backgroundColor = "white";
+            divDays.style.padding = "0";
             divDays.id = a;
-            divDays.setAttribute("class", "col-2 text-center");
+            divDays.setAttribute("class", "col-2 d-flex justify-content-center d-flex align-items-center");
             divDays.style.height = "4rem";
             divDays.style.borderRight = "1px gray solid";
             dienuTevas.appendChild(divDays);
@@ -61,16 +69,19 @@ const oruPrognoze = async () => {
             } else {
                 divDays.innerHTML = finalDate;
             }
+            rodykOrus()
             divDays.addEventListener("click", rodykOrus);
 
             function rodykOrus() {
                 valanduTevas.innerHTML = "";
+                //divDays.style.transform = "scale(2, 1.4)";
                 data.forecastTimestamps.forEach(oras => {
                     console.log(oras)
                     const dienos = oras.forecastTimeUtc.split(" ");
                     if (dienos[0] === divDays.id) {
                         // console.log("Tinka");
                         const divHours = document.createElement("div");
+                        divHours.style.backgroundColor = "white";
                         divHours.style.border = "1px gray solid";
                         divHours.setAttribute("class", "col-2 text-center");
                         valanduTevas.appendChild(divHours);

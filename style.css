@@ -15,8 +15,21 @@ body{
     background-size: cover;
     background-position: center;
 }
-.scrolling-wrapper {
+#searchCity, #searchBtn{
+    background-color: #dab3ff;
+    color: white;
+}
+::placeholder{
+    color: white;
+}
+h1{
+    font-size: 22px;
+    margin: 0;
+}
+.scrolling-wrapper{
     overflow-x: auto;
     white-space: nowrap;
 }
-
+#cityNamePlace{
+    font-size: 20px;
+}
