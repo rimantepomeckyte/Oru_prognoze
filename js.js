@@ -1,3 +1,5 @@
+"use strict"
+
 // https://api.meteo.lt/v1/places
 //https://api.meteo.lt/v1/places/vilnius
 // https://api.meteo.lt/v1/places/vilnius/forecasts/long-term
@@ -16,7 +18,7 @@ const visiMiestai = async () => {
     try {
         const response = await fetch(`https://api.meteo.lt/v1/places/${searchInput.value}`);
         const data = await response.json();
-        // console.log(data);
+        //console.log(data);
 
         if (searchInput.value == data.code) {
             cityNamePlace.innerHTML = data.name
@@ -29,7 +31,7 @@ const visiMiestai = async () => {
 searchBtn.addEventListener("click", visiMiestai);
 visiMiestai();
 
-//---------------Dienu ikelimas i html ------------------------
+//---------------Dienu ir orų ikelimas i html------------------------
 const oruPrognoze = async () => {
     try {
         console.log("labas orai!");
@@ -47,8 +49,8 @@ const oruPrognoze = async () => {
             if (a.indexOf(b) < 0) a.push(b);
             return a;
         }, [])
-
         console.log(uniq);
+        dienuTevas.innerHTML ="";
         uniq.forEach(a => {
             const finalDate = new Date(a).toDateString();
             console.log(finalDate);
@@ -64,20 +66,22 @@ const oruPrognoze = async () => {
             } else {
                 divDays.innerHTML = finalDate;
             }
-            const rodykOrus = data.forecastTimestamps.forEach(oras => {
+           divDays.addEventListener("click", rodykOrus);
+
+            function rodykOrus(){
+                valanduTevas.innerHTML = "";
+            data.forecastTimestamps.forEach(oras => {
                 const dienos = oras.forecastTimeUtc.split(" ");
-                if (dienos[0] != divDays.id) {
-                    console.log("Netinka");
+                if (dienos[0] === divDays.id) {
+                    console.log("Tinka");
+                    const divHours = document.createElement("div");
+                    valanduTevas.appendChild(divHours);
+                    divHours.innerHTML = `<p>${dienos}</p>`
                     //console.log(dienos[0])
                 } else {
-                    /*const divHours = document.createElement("div");
-                    valanduTevas.appendChild(divHours);
-                    divHours.innerHTML = `<p>${dienos}</p>`*/
-                    console.log("tinka")
+                        console.log("netinka")
                 }
-
-            });
-            rodykOrus;
+            });}
         })
     } catch (error) {
         console.log(error);
@@ -85,23 +89,8 @@ const oruPrognoze = async () => {
 }
 searchBtn.addEventListener("click", oruPrognoze);
 
-//-----------------ikelia reiksmias i html bet visas------------
-
-/* data.forecastTimestamps.forEach(oras => {
-     // console.log(oras);
-     if (naujosDatos == oras.forecastTimeUtc)
-     const divHours = document.createElement("div");
-     valanduTevas.appendChild(divHours);
-     divHours.innerHTML = `<p>${oras.forecastTimeUtc}</p>
-                      <p>${oras.airTemperature}</p>
-                      <p>Humidity: ${oras.relativeHumidity}%</p>
-                      <p>${oras.totalPrecipitation}</p>`
-     //console.log(oras.forecastTimeUtc);
-     //console.log(oras.airTemperature);
- })*/
-
 //---------Suggestions-----------------
-/*const  suggestions = async () => {
+const  suggestions = async () => {
    console.log("Labas suggestion funkcija")
    console.log(searchInput.value)
    const reiksme = searchInput.value;
@@ -120,6 +109,5 @@ searchBtn.addEventListener("click", oruPrognoze);
    }catch (error){
        console.log(error)
    }
-}*/
-
-//searchInput.addEventListener("keyup", suggestions);
+}
+searchInput.addEventListener("keyup", suggestions);
