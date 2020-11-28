@@ -2,7 +2,7 @@
 const searchInput = document.getElementById("searchCity");
 const searchBtn = document.getElementById("searchBtn");
 const cityNamePlace = document.getElementById("cityNamePlace");
-const suggestionsList = document.getElementById("suggestionsList")
+//const suggestionsList = document.getElementById("suggestionsList")
 const dienuTevas = document.getElementById("dienuTevas")
 const valanduTevas = document.getElementById("valandiniuTevas");
 const lastUpdated = document.getElementById("lastUpdated");
@@ -61,7 +61,7 @@ const oruPrognoze = async () => {
             divDays.style.padding = "0";
             divDays.id = a;
             divDays.setAttribute("class", "col-2 d-flex justify-content-center d-flex align-items-center");
-            divDays.style.height = "4rem";
+           divDays.style.height = "5rem";
             divDays.style.borderRight = "1px gray solid";
             dienuTevas.appendChild(divDays);
             if (divDays.id === uniq[0]) {
@@ -69,12 +69,11 @@ const oruPrognoze = async () => {
             } else {
                 divDays.innerHTML = finalDate;
             }
-            rodykOrus()
             divDays.addEventListener("click", rodykOrus);
 
             function rodykOrus() {
                 valanduTevas.innerHTML = "";
-                //divDays.style.transform = "scale(2, 1.4)";
+                //divDays.style.transform = "scale(1.5)";
                 data.forecastTimestamps.forEach(oras => {
                     console.log(oras)
                     const dienos = oras.forecastTimeUtc.split(" ");
@@ -142,6 +141,7 @@ const oruPrognoze = async () => {
     }
 }
 searchBtn.addEventListener("click", oruPrognoze);
+
 
 //---------Suggestions-----------------
 /*const  suggestions = async () => {
