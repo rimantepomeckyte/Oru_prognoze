@@ -30,7 +30,6 @@ const visiMiestai = async () => {
     }
 }
 searchBtn.addEventListener("click", visiMiestai);
-visiMiestai();
 
 //---------------Dienu ir orų ikelimas i html------------------------
 const oruPrognoze = async () => {
@@ -58,22 +57,37 @@ const oruPrognoze = async () => {
             console.log(finalDate);
             const divDays = document.createElement("div");
             divDays.style.backgroundColor = "white";
-            divDays.style.padding = "0";
+            divDays.style.cursor = "pointer";
             divDays.id = a;
-            divDays.setAttribute("class", "col-2 d-flex justify-content-center d-flex align-items-center");
-           divDays.style.height = "5rem";
+            divDays.setAttribute("class", "col-2 d-flex justify-content-center d-flex align-items-center scale mr-2");
+            divDays.style.height = "5rem";
             divDays.style.borderRight = "1px gray solid";
+            divDays.style.borderBottom = "3px #c33333 solid"
             dienuTevas.appendChild(divDays);
             if (divDays.id === uniq[0]) {
-                divDays.innerHTML = "Šiandien";
+                divDays.innerHTML = `<p>Šiandien</p>`;
+                rodykOrus(divDays.id);
+                divDays.setAttribute("class", "active col-2 d-flex justify-content-center d-flex align-items-center scale mr-2");
             } else {
-                divDays.innerHTML = finalDate;
+                divDays.innerHTML = `<p>${finalDate}</p>`;
             }
+
+            const forScale = dienuTevas.getElementsByClassName("scale");
+            for (let i = 0; i < forScale.length; i++) {
+                forScale[i].addEventListener("click", scale);
+
+                function scale() {
+                    const activeDiv = dienuTevas.getElementsByClassName("active");
+                    if (activeDiv.length > 0){
+                    activeDiv[0].className = activeDiv[0].className.replace("active", "")}
+                    this.className += " active";
+                }
+            }
+
             divDays.addEventListener("click", rodykOrus);
 
             function rodykOrus() {
                 valanduTevas.innerHTML = "";
-                //divDays.style.transform = "scale(1.5)";
                 data.forecastTimestamps.forEach(oras => {
                     console.log(oras)
                     const dienos = oras.forecastTimeUtc.split(" ");
@@ -99,11 +113,23 @@ const oruPrognoze = async () => {
                         switch (condition) {
                             case "clear":
                                 console.log("Giedra");
-                                iconImage.src = "img/clear.png";
+                                if (hoursArray[0] == "08" || hoursArray[0] == "09" || hoursArray[0] == "10" || hoursArray[0] == "11"
+                                    || hoursArray[0] == "12" || hoursArray[0] == "13" || hoursArray[0] == "14" || hoursArray[0] == "15" ||
+                                    hoursArray[0] == "16") {
+                                    iconImage.src = "img/clear.png";
+                                } else {
+                                    iconImage.src = "img/clear-night.png";
+                                }
                                 break;
                             case "isolated-clouds":
                             case "scattered-clouds":
-                                iconImage.src = "img/isolated-clouds-scattered-clouds.png";
+                                if (hoursArray[0] == "08" || hoursArray[0] == "09" || hoursArray[0] == "10" || hoursArray[0] == "11"
+                                    || hoursArray[0] == "12" || hoursArray[0] == "13" || hoursArray[0] == "14" || hoursArray[0] == "15" ||
+                                    hoursArray[0] == "16") {
+                                    iconImage.src = "img/isolated-clouds-scattered-clouds.png";
+                                } else {
+                                    iconImage.src = "img/isolated-clouds-monn.png";
+                                }
                                 break;
                             case "overcast":
                                 iconImage.src = "img/overcast.png";
@@ -140,28 +166,29 @@ const oruPrognoze = async () => {
         console.log(error);
     }
 }
+visiMiestai(searchInput.value = "kaunas");
+oruPrognoze(searchInput.value = "kaunas");
 searchBtn.addEventListener("click", oruPrognoze);
 
-
 //---------Suggestions-----------------
-/*const  suggestions = async () => {
-   console.log("Labas suggestion funkcija")
-   console.log(searchInput.value)
-   const reiksme = searchInput.value;
-   try {
-       const response = await fetch(`https://api.meteo.lt/v1/places/${reiksme}`);
-       const data = await response.json();
-       console.log(data);
-       while (suggestionsList.firstChild){
-           suggestionsList.removeChild(suggestionsList.firstChild);
-       }
-       for (let i=0; i<data.length; i++){
-           const option = document.createElement("option");
-           suggestionsList.appendChild(option);
-           option.innerHTML = data[i].name;
-       }
-   }catch (error){
-       console.log(error)
-   }
+/*const suggestions = async () => {
+    console.log("Labas suggestion funkcija")
+    console.log(searchInput.value)
+    const reiksme = searchInput.value;
+    try {
+        const response = await fetch(`https://api.meteo.lt/v1/places/${reiksme}`);
+        const data = await response.json();
+        console.log(data);
+        while (suggestionsList.firstChild){
+            suggestionsList.removeChild(suggestionsList.firstChild);
+        }
+        for (let i=0; i<data.length; i++){
+            const option = document.createElement("option");
+            suggestionsList.appendChild(option);
+            option.innerHTML = data[i].name;
+        }
+    } catch (error) {
+        console.log(error)
+    }
 }
 searchInput.addEventListener("keyup", suggestions);*/

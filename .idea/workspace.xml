@@ -12,7 +12,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9131e5f-019d-4926-8796-162ab223aa3a" name="Default Changelist" comment="Orai">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js.js" beforeDir="false" afterPath="$PROJECT_DIR$/js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +45,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Webas/Fetch_salys_GalutinisVar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JS_Weather_APPVaidos" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -62,7 +64,10 @@
       <workItem from="1606419768778" duration="6027000" />
       <workItem from="1606460478091" duration="10949000" />
       <workItem from="1606496177756" duration="2937000" />
-      <workItem from="1606499256882" duration="29141000" />
+      <workItem from="1606499256882" duration="29402000" />
+      <workItem from="1606586278705" duration="58000" />
+      <workItem from="1606664000873" duration="3333000" />
+      <workItem from="1606726774807" duration="5737000" />
     </task>
     <task id="LOCAL−00001" summary="Orai">
       <created>1606473219675</created>
@@ -100,7 +105,13 @@
       <option name="presentableId" value="LOCAL−00006" />
       <updated>1606584452116</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL−00007" summary="Orai">
+      <created>1606586051997</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1606586051997</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,18 +134,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="Orai" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1606570044156">
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1606727580643">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1606570044156" />
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1606727580643" />
     <state x="311" y="18" key="SettingsEditor" timestamp="1606397151856">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="311" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606397151856" />
-    <state x="480" y="106" key="Vcs.Push.Dialog.v2" timestamp="1606584454391">
+    <state x="480" y="106" key="Vcs.Push.Dialog.v2" timestamp="1606586054254">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="480" y="106" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1606584454391" />
+    <state x="480" y="106" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1606586054254" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1606488159656">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

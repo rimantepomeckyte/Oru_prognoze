@@ -6,7 +6,6 @@ html{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'B612', sans-serif;
 }
 body{
     width: 100%;
@@ -14,6 +13,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    font-family: Georgia, serif;
 }
 #searchCity, #searchBtn{
     background-color: #dab3ff;
@@ -23,7 +23,7 @@ body{
     color: white;
 }
 h1{
-    font-size: 22px;
+    font-size: 30px;
     margin: 0;
 }
 .scrolling-wrapper{
@@ -32,4 +32,12 @@ h1{
 }
 #cityNamePlace{
     font-size: 20px;
+}
+.active{
+    transform: scale(1.1, 1.3);
+    border-top: 3px #c33333 solid;
+}
+#dienuTevas{
+    height: 8rem;
+    overflow-y: hidden;
 }
