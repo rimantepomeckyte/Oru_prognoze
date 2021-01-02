@@ -41,3 +41,7 @@ h1{
     height: 8rem;
     overflow-y: hidden;
 }
+#matchList{
+    overflow-y: auto;
+    max-height: 5rem;
+}

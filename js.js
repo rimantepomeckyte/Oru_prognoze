@@ -2,8 +2,8 @@
 const searchInput = document.getElementById("searchCity");
 const searchBtn = document.getElementById("searchBtn");
 const cityNamePlace = document.getElementById("cityNamePlace");
-//const suggestionsList = document.getElementById("suggestionsList")
-const dienuTevas = document.getElementById("dienuTevas")
+const matchList = document.getElementById("matchList");
+const dienuTevas = document.getElementById("dienuTevas");
 const valanduTevas = document.getElementById("valandiniuTevas");
 const lastUpdated = document.getElementById("lastUpdated");
 
@@ -30,6 +30,11 @@ const visiMiestai = async () => {
     }
 }
 searchBtn.addEventListener("click", visiMiestai);
+searchInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        visiMiestai();
+    }
+});
 
 //---------------Dienu ir orų ikelimas i html------------------------
 const oruPrognoze = async () => {
@@ -38,7 +43,7 @@ const oruPrognoze = async () => {
         console.log(searchInput.value)
         const response = await fetch(`https://api.meteo.lt/v1/places/${searchInput.value}/forecasts/long-term`);
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         const lastChangedSplit = data.forecastCreationTimeUtc.split(" ");
         lastUpdated.innerHTML = `Paskutinį kartą atnaujintą šiandien ${lastChangedSplit[1]}`
         const naujosDatos = data.forecastTimestamps.map(diena => {
@@ -50,7 +55,7 @@ const oruPrognoze = async () => {
             if (a.indexOf(b) < 0) a.push(b);
             return a;
         }, [])
-        console.log(uniq);
+        //console.log(uniq);
         dienuTevas.innerHTML = "";
         uniq.forEach(a => {
             const finalDate = new Date(a).toDateString();
@@ -78,8 +83,9 @@ const oruPrognoze = async () => {
 
                 function scale() {
                     const activeDiv = dienuTevas.getElementsByClassName("active");
-                    if (activeDiv.length > 0){
-                    activeDiv[0].className = activeDiv[0].className.replace("active", "")}
+                    if (activeDiv.length > 0) {
+                        activeDiv[0].className = activeDiv[0].className.replace("active", "")
+                    }
                     this.className += " active";
                 }
             }
@@ -89,7 +95,7 @@ const oruPrognoze = async () => {
             function rodykOrus() {
                 valanduTevas.innerHTML = "";
                 data.forecastTimestamps.forEach(oras => {
-                    console.log(oras)
+                    //console.log(oras)
                     const dienos = oras.forecastTimeUtc.split(" ");
                     if (dienos[0] === divDays.id) {
                         // console.log("Tinka");
@@ -112,7 +118,7 @@ const oruPrognoze = async () => {
                         divHours.insertBefore(iconImage, divHours.childNodes[1]);
                         switch (condition) {
                             case "clear":
-                                console.log("Giedra");
+                                // console.log("Giedra");
                                 if (hoursArray[0] == "08" || hoursArray[0] == "09" || hoursArray[0] == "10" || hoursArray[0] == "11"
                                     || hoursArray[0] == "12" || hoursArray[0] == "13" || hoursArray[0] == "14" || hoursArray[0] == "15" ||
                                     hoursArray[0] == "16") {
@@ -169,26 +175,38 @@ const oruPrognoze = async () => {
 visiMiestai(searchInput.value = "kaunas");
 oruPrognoze(searchInput.value = "kaunas");
 searchBtn.addEventListener("click", oruPrognoze);
+searchInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        oruPrognoze();
+    }
+});
 
 //---------Suggestions-----------------
-/*const suggestions = async () => {
-    console.log("Labas suggestion funkcija")
-    console.log(searchInput.value)
-    const reiksme = searchInput.value;
-    try {
-        const response = await fetch(`https://api.meteo.lt/v1/places/${reiksme}`);
-        const data = await response.json();
-        console.log(data);
-        while (suggestionsList.firstChild){
-            suggestionsList.removeChild(suggestionsList.firstChild);
-        }
-        for (let i=0; i<data.length; i++){
-            const option = document.createElement("option");
-            suggestionsList.appendChild(option);
-            option.innerHTML = data[i].name;
-        }
-    } catch (error) {
-        console.log(error)
+
+/*const searchCity = async searchText => {
+    const response = await fetch(`https://api.meteo.lt/v1/places`);
+    const data = await response.json();
+    console.log(data)
+    let matches = data.filter(city => {
+        const regex = new RegExp(`^${searchText}`, `gi`);
+        return city.name.match(regex);
+    });
+    console.log(matches)
+
+    if (searchText.length === 0) {
+        matches = [];
+        matchList.innerHTML = "";
     }
+    const outputHtml = matches => {
+        if (matches.length > 0) {
+            console.log("hello")
+            matches.map(match => {
+                const option = document.createElement("option");
+            option.innerHTML = match.name;
+            matchList.appendChild(option)
+        })}
+    }
+    outputHtml(matches);
 }
-searchInput.addEventListener("keyup", suggestions);*/
+
+searchInput.addEventListener("input", () => searchCity(searchInput.value));*/
